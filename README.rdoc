@@ -1,0 +1,7 @@
+= kaltura-ruby
+
+Description goes here.
+
+== Copyright
+
+Copyright (c) 2009 papyromancer. See LICENSE for details.
