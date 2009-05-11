@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "kaltura-ruby"
-    gem.summary = %Q{TODO}
-    gem.email = "papyromancer@james.local"
+    gem.summary = "Ruby gem for accessing the Kaltura API"
+    gem.email = "papyromancer@papyromancer.net"
     gem.homepage = "http://github.com/papyromancer/kaltura-ruby"
     gem.authors = ["papyromancer"]
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings

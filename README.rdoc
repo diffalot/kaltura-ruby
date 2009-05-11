@@ -1,6 +1,14 @@
 = kaltura-ruby
 
-Description goes here.
+A gem implementation of Kaltura's Ruby API implementation.
+
+Copyright (C) 2006-2008 Kaltura Inc.
+
+= Usage
+
+    require 'rubygems'
+    require 'kaltura-ruby'
+    include Kaltura
 
 == Copyright
 
