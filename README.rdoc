@@ -16,6 +16,4 @@ The original Ruby client library for Kaltura may be found at http://www.kaltura.
 
 This library is released in compliance with the GNU Affero General Public License.
 
-Copyright (c) 2006-2008 Kaltura Inc.
-
-Copyright (c) 2009 papyromancer. See LICENSE for details.
+Copyright (c) 2006-2008 Kaltura Inc.  See LICENSE for details.
