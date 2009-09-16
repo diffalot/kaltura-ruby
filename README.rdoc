@@ -2,7 +2,7 @@
 
 A gem implementation of Kaltura's Ruby API implementation.
 
-Copyright (C) 2006-2008 Kaltura Inc.
+http://www.kaltura.org/project/kcl_ruby
 
 = Usage
 
@@ -11,5 +11,11 @@ Copyright (C) 2006-2008 Kaltura Inc.
     include Kaltura
 
 == Copyright
+
+The original Ruby client library for Kaltura may be found at http://www.kaltura.org/project/kcl_ruby .  This implementation of the library as a gem attempts to track the Kaltura svn as closely as possible while adding relevant documentation.
+
+This library is released in compliance with the GNU Affero General Public License.
+
+Copyright (c) 2006-2008 Kaltura Inc.
 
 Copyright (c) 2009 papyromancer. See LICENSE for details.
