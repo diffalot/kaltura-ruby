@@ -8,7 +8,9 @@ http://www.kaltura.org/project/kcl_ruby
 
     require 'rubygems'
     require 'kaltura-ruby'
-    include Kaltura
+    
+    config = Kaltura::Configuration.new( your_partner_id , your_subpartner_id )
+    user = Kaltura::KalturaSessionUser.new( your_partner_id )
 
 == Copyright
 

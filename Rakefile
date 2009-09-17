@@ -9,6 +9,9 @@ begin
     gem.email = "papyromancer@papyromancer.net"
     gem.homepage = "http://github.com/papyromancer/kaltura-ruby"
     gem.authors = ["papyromancer"]
+    gem.add_dependency('activesupport')
+    gem.add_dependency('activeresource')
+    gem.add_dependency('json')
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 
