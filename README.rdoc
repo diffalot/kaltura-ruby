@@ -6,10 +6,9 @@ http://www.kaltura.org/project/kcl_ruby
 
 = Usage
 
-    require 'rubygems'
     require 'kaltura-ruby'
     
-    config = Kaltura::Configuration.new( your_partner_id , your_subpartner_id )
+    config = Kaltura::KalturaConfiguration.new( your_partner_id , your_subpartner_id )
     user = Kaltura::KalturaSessionUser.new( your_partner_id )
 
 == Copyright
