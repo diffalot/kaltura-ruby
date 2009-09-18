@@ -10,8 +10,18 @@ http://www.kaltura.org/project/kcl_ruby
 
     require 'kaltura-ruby'
     
-    config = Kaltura::KalturaConfiguration.new( your_partner_id , your_subpartner_id )
-    user = Kaltura::KalturaSessionUser.new( your_partner_id )
+    # These values may be retrieved from your KMC account
+    login_email = your_login_email
+    login_password = your_login_password
+    parner_id = your_partner_id
+    subpartner_id = your_subpartner_id
+    administrator_secret = your_administrator_secret
+    user_secret = your_user_secret
+    
+    config = Kaltura::KalturaConfiguration.new( partner_id , subpartner_id )
+    user = Kaltura::KalturaSessionUser.new( partner_id )
+    client = Kaltura::KalturaClient.new( config )
+    admin = client.adminLogin( user , login_email , login_password )
 
 == Copyright
 
