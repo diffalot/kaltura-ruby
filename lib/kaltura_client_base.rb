@@ -1,217 +1,282 @@
-#
-# This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platfroms allow them to do with
-# text.
-#
-# Copyright (C) 2006-2008 Kaltura Inc.
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-# 
-
 require 'rubygems'
 require 'json'
 require 'net/http'
-require 'active_support'
-require 'active_resource'
 require 'digest/md5'
+require 'rexml/document'
 
 module Kaltura
-  class KalturaClientBase
-  
-  	FORMATS = {
-  		:KALTURA_SERVICE_FORMAT_JSON => 1, 
-  		:KALTURA_SERVICE_FORMAT_XML => 2,
-  		:KALTURA_SERVICE_FORMAT_PHP => 3}
-  
-  	KALTURA_API_VERSION = "0.7"
-  
-  	attr_accessor :config
-  	attr_accessor :ks
-  	attr_accessor :shouldLog
-  
-    def serialize_params(params)
-      params.keys.map {|key| key.to_s }.sort.map {|key|
-        "#{escape(key)}=#{escape(params[key])}"
-      }.join("&")
-    end
-      
-    def connection
-      @connection ||= ActiveResource::Connection.new(@config.serviceUrl)
-    end
+	class KalturaClientBase
+		attr_accessor 	:config
+		attr_accessor 	:ks
+		attr_reader 	:is_multirequest
+	
+		def initialize(config)
+			@should_log = false
+			@config = config
+			@calls_queue = []
+	
+			if @config.logger != nil
+				@should_log = true
+			end
+		end
+		
+		def queue_service_action_call(service, action, params = {})
+			# in start session partner id is optional (default -1). if partner id was not set, use the one in the config
+			if (!params.key?('partnerId') || params['partnerId'] == -1)
+				params['partnerId'] = config.partner_id;
+			end	
+			
+			add_param(params, 'ks', @ks);
+			
+			call = KalturaServiceActionCall.new(service, action, params);
+			@calls_queue.push(call);
+		end
+	
+		def do_queue()
+			start_time = Time.now
+			
+			if @calls_queue.length == 0
+				@is_multirequest = false
+				return nil
+			end
+					
+			log('service url: [' + @config.service_url + ']')
+			
+			# append the basic params
+			params = {}
+			add_param(params, "format", @config.format)
+			add_param(params, "clientTag", @config.client_tag)
+			
+			url = @config.service_url+"/api_v3/index.php?service="
+			if (@is_multirequest)
+				url += "multirequest"
+				i = 1
+				@calls_queue.each_value do |call|
+					call_params = call.get_params_for_multirequest(i.next)
+					params.merge!(call_params)
+				end
+			else
+				call = @calls_queue[0]
+				url += call.service + "&action=" + call.action
+				params.merge!(call.params)
+			end
+			
+			# reset
+			@calls_queue = []
+			@is_multirequest = false
+			
+			signature = signature(params)
+			add_param(params, "kalsig", signature)
+			
+			log("url: " + url)
+			log("params: " + params.to_yaml)
+			
+			result = do_http_request(url, params)
+			
+			result_object = parse_to_objects(result.body)
 
-    def post(path, options)
-      connection.post(path, serialize_params(options), headers)
-    end
-  
-    def headers
-      @headers ||= { 'Content-Type' => 'application/x-www-form-urlencoded' }
-    end
-  
-    # Escapes a query parameter. Stolen from RFuzz
-    def escape(s)
-      s.to_s.gsub(/([^ a-zA-Z0-9_.-]+)/n) {
-        '%' + $1.unpack('H2'*$1.size).join('%').upcase
-      }.tr(' ', '+')
-    end
-      
-  	#
-  	# Kaltura client constuctor, expecting configuration object 
-  	#
-  	# @param KalturaConfiguration $config
-  	#
-    def initialize(config)
-  		@shouldLog = false
-  		@config = config;
-  		
-  		logger = config.getLogger()
-  
-  		if logger != nil
-        @shouldLog = true
-      end
-    end
-  
-  	def hit(method, session_user, params)
-      start_time = Time.now
-      
-      log("service url: [#{@config.serviceUrl}]");
-      log("trying to call method: [#{method}] for user id: [#{session_user.userId}] using session: [#{@ks}]");
-      
-      # append the basic params
-      params["kaltura_api_version"] 	= KalturaClientBase::KALTURA_API_VERSION
-      params["partner_id"] 			= @config.partnerId
-      params["subp_id"] 				= @config.subPartnerId
-      params["format"]          = @config.format
-      params["uid"]             = session_user.userId
-      addOptionalParam(params, "user_name", session_user.screenName)
-      addOptionalParam(params, "ks", @ks)
-      
-      params["kalsig"] = signature(params);
-    
-      url = "/index.php/partnerservices2/" + method
-      log("full reqeust url: [#{url}] params: [#{serialize_params(params)}]")
-      
-  		response = post(url, params)
-      
-      log("result (serialized): #{response.body}");
-      
-  		json = JSON.parse(response.body)
-      #log("result (object dump): #{dump}");
-      
-      end_time = Time.now
-      
-      log("execution time for method [#{method}]: [#{end_time - start_time}]")
-      
-      return json
-  	end
-  
-  	def start(session_user, secret)
-  		result = startSession(session_user, secret)
-  
-  		@ks = result["result"]["ks"]
-  		return result
-  	end
-  	
-  	def signature(params)
-      str = params.keys.map {|key| key.to_s }.sort.map {|key|
-        "#{escape(key)}#{escape(params[key])}"
-      }.join("")
-      
-      Digest::MD5.hexdigest(str)
-  	end
-  		
-  	def getKs()
-  		@ks
-  	end
-  	
-  	def setKs(ks)
-  		@ks = ks
-  	end
-  	
-  	def addOptionalParam(params, paramName, paramValue)
-  		params[paramName] = paramValue if paramValue
-  	end
-  	
-  	def log(msg)
-      #print "#{msg}\n"
-  		if @shouldLog
-  			config.getLogger().log(msg)
-  		end
-  	end
-  
-  
-  end
-  
-  class KalturaSessionUser
-  	attr_accessor :userId
-  	attr_accessor :screenName
-  	
-  	def initialize(userId, screenName = nil)
-  		@userId = userId;
-  		@screenName = screenName;
-  	end
-  end
-  
-  class KalturaConfiguration
-  	attr_accessor :logger
-  
-  	def serviceUrl
-  		URI.parse("http://www.kaltura.com/")
-  	end
-  
-  	def format
-  		KalturaClientBase::FORMATS[:KALTURA_SERVICE_FORMAT_JSON]
-  	end
-  
-  	attr_accessor :partnerId
-  	attr_accessor :subPartnerId
-  
-  	#
-  	# Constructs new kaltura configuration object, expecting partner id & sub partner id
-  	#
-  	# @param int $partnerId
-  	# @param int $subPartnerId
-  	#
-  	def initialize(partnerId, subPartnerId)
-  		@partnerId 	= partnerId;
-  		@subPartnerId = subPartnerId;
-  	end
-  	
-  	#
-  	# Set logger to get kaltura client debug logs
-  	#
-  	# @param IKalturaLogger $log
-  	#
-  	def setLogger(log)
-  		@logger = log
-  	end
-  	
-  	#
-  	# Gets the logger (Internal client use)
-  	#
-  	# @return unknown
-  	#
-  	def getLogger()
-  		@logger;
-  	end
-  end
-  
-  #
-  # Implement to get kaltura client logs
-  #
-  #
-  class IKalturaLogger 
-  	def log(msg)
-  	end
-  end
+			log("result (object yaml dump): " + result_object.to_yaml)
+			
+			end_time = Time.now
+			log("execution time for [#{url}]: [#{end_time - start_time}]")
+			
+			return result_object			
+		end
+		
+		def do_http_request(url, params)
+			url = URI.parse(url)
+			req = Net::HTTP::Post.new(url.path + '?' + url.query)
+			req.set_form_data(params)
+			res = Net::HTTP.new(url.host, url.port).start { |http| http.request(req) }
+			return res
+		end
+		
+		def parse_to_objects(data)
+			parse_xml_to_objects(data)
+		end
+		
+		def parse_xml_to_objects(xml)
+			doc = REXML::Document.new(xml)
+			doc.elements.each('xml/result') do | element |
+				return KalturaClassFactory.object_from_xml(element)
+			end
+		end
+		
+		def parse_element_to_object(xml_element)
+		end
+		
+		def parse_elements_to_array(xml_elements)
+			xml_elements.each('item') do | element |
+			end
+		end
+		
+		def start_multirequest()
+			@is_multirequest = true
+		end
+	
+		def do_multirequest()
+			return do_queue()
+		end
+
+		def signature(params)
+			str = params.keys.map {|key| key.to_s }.sort.map {|key|
+				"#{escape(key)}#{escape(params[key])}"
+			}.join("")
+			
+			Digest::MD5.hexdigest(str)
+		end
+		
+		def add_param(params, name, value)
+			if value == nil
+				return
+			elsif value.is_a? Hash
+				value.each do |sub_name, sub_value|
+					add_param(params, "#{name}:#{sub_name}", sub_value);
+				end
+			elsif value.is_a? KalturaObjectBase
+				add_param(params, name, value.to_params)
+			else
+				params[name] = value
+			end
+		end
+	
+		# Escapes a query parameter. Stolen from RFuzz
+		def escape(s)
+			s.to_s.gsub(/([^ a-zA-Z0-9_.-]+)/n) {
+				'%' + $1.unpack('H2'*$1.size).join('%').upcase
+			}.tr(' ', '+')
+		end
+		
+		def log(msg)
+			if @should_log
+				config.logger.log(msg)
+			end
+		end
+	end
+	
+	class KalturaServiceActionCall
+		attr_accessor :service
+		attr_accessor :action
+		attr_accessor :params
+	
+		def initialize(service, action, params = array())
+			@service = service
+			@action = action
+			@params = parse_params(params)
+		end
+	
+		def parse_params(params)
+			new_params = {}
+			params.each do |key, val| 
+				if val.kind_of? Hash
+					new_params[key] = parse_params(val)
+				else
+					new_params[key] = val
+				end
+			end
+			return new_params
+		end
+	
+		def get_params_for_multirequest(multirequest_index)
+			multirequest_params = {}
+			multirequest_params[multirequest_index+":service"] = @service
+			multirequest_params[multirequest_index+":action"] = @action
+			@params.each do |key|
+				multirequest_params[multirequest_index+":"+key] = @params[key]
+			end
+			return multirequest_params
+		end
+	end
+
+	class KalturaObjectBase
+		attr_accessor :object_type
+		
+		def to_params
+			params = {};
+			params["objectType"] = self.class.name.split('::').last 
+			instance_variables.each do |var|
+				value = instance_variable_get(var)
+				var = var.sub('@', '')
+				kvar = camelcase(var)
+				if (value != nil)
+					if (value.is_a? KalturaObjectBase)
+						params[kvar] = value.to_params;
+					else
+						params[kvar] = value;
+					end
+				end
+			end
+			return params;
+		end
+		
+		def to_b(val)
+			return [true, 'true', 1, '1'].include?(val.is_a?(String) ? val.downcase : val)
+		end
+		
+		def camelcase(val)
+			val = val.split('_').map { |e| e.capitalize }.join()
+			val[0,1].downcase + val[1,val.length]
+		end
+	end
+	
+	class KalturaServiceBase
+		attr_accessor :client
+		
+		def initialize(client)
+			@client = client
+		end
+	end
+
+	class KalturaConfiguration
+		attr_accessor :logger
+		attr_accessor :service_url
+		attr_accessor :format
+		attr_accessor :client_tag
+		attr_accessor :timeout
+		attr_accessor :partner_id
+	
+		def initialize(partner_id = -1)
+			@service_url 	= "http://www.kaltura.com"
+			@format 		= 2 # xml
+			@client_tag 	= "ruby"
+			@timeout 		= 10
+			@partner_id 	= partner_id
+		end
+		
+		def service_url=(url)
+			@service_url = url.chomp('/')
+		end
+	end
+	
+	class KalturaClassFactory
+		def self.object_from_xml(xml_element)
+			instance = nil
+	        if xml_element.elements.size > 0
+				if xml_element.elements[1].name == 'item' # array	
+					instance = []
+					xml_element.elements.each('item') do | element |
+						instance.push(KalturaClassFactory.object_from_xml(element))
+					end
+				else # object
+					object_type_element = xml_element.get_text('objectType')
+					if (object_type_element != nil)
+						object_class = xml_element.get_text('objectType').value
+						instance = Object.const_get(object_class).new
+						xml_element.elements.each do | element |
+							value = KalturaClassFactory.object_from_xml(element)
+							instance.send(self.underscore(element.name) + "=", value);
+						end
+					end
+				end
+			else # simple type
+	        	return xml_element.text
+	       	end
+	
+	       	return instance;
+		end
+		
+		def self.underscore(val)
+			val.gsub(/(.)([A-Z])/,'\1_\2').downcase
+		end
+	end
 end
