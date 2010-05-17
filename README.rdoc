@@ -1,13 +1,12 @@
 = kaltura-ruby
 
-A gem implementation of Kaltura's Ruby API implementation.
-
-Currently this gem uses the very outdated api version 0.7, there are tools to generate a more up to date version of the api included in the main KalturaCE distribution.  For more information, visit http://www.kaltura.org/api-client-library-generator-guide
+A gem implementation of Kaltura's Ruby API client
 
 http://www.kaltura.org/project/kcl_ruby
 
 = Usage
-
+    
+    require 'yaml'
     require 'kaltura-ruby'
     
     # These values may be retrieved from your KMC account
@@ -18,10 +17,12 @@ http://www.kaltura.org/project/kcl_ruby
     administrator_secret = your_administrator_secret
     user_secret = your_user_secret
     
-    config = Kaltura::KalturaConfiguration.new( partner_id , subpartner_id )
-    user = Kaltura::KalturaSessionUser.new( partner_id )
+    config = Kaltura::KalturaConfiguration.new( partner_id )
     client = Kaltura::KalturaClient.new( config )
-    admin = client.adminLogin( user , login_email , login_password )
+    session = client.session_service.start( user_secret )
+    media = Kaltura::KalturaBaseEntryService.new( session )
+    media.list
+    session.stop
 
 == Copyright
 
