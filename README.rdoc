@@ -4,25 +4,37 @@ A gem implementation of Kaltura's Ruby API client
 
 http://www.kaltura.org/project/kcl_ruby
 
+= Installation
+
+    $ gem install kaltura-ruby
+
 = Usage
-    
+
     require 'yaml'
     require 'kaltura-ruby'
     
     # These values may be retrieved from your KMC account
     login_email = your_login_email
     login_password = your_login_password
-    parner_id = your_partner_id
+    partner_id = your_partner_id
     subpartner_id = your_subpartner_id
     administrator_secret = your_administrator_secret
     user_secret = your_user_secret
     
     config = Kaltura::KalturaConfiguration.new( partner_id )
     client = Kaltura::KalturaClient.new( config )
-    session = client.session_service.start( user_secret )
-    media = Kaltura::KalturaBaseEntryService.new( session )
-    media.list
-    session.stop
+    session = client.session_service.start( admin_secret, '', KalturaSessionType::ADMIN )
+    client.ks = session
+    
+    filter = KalturaFilter.new
+    pager = KalturaFilterPager.new
+    
+    media = client.media_service.list(filter, pager)
+    puts "\nmedia:"
+    puts media.to_yaml
+    
+    #video = File.open("/home/papyromancer/ovb.ogv")
+    #client.media_service.upload(video)
 
 == Copyright
 
@@ -30,4 +42,4 @@ The original Ruby client library for Kaltura may be found at http://www.kaltura.
 
 This library is released in compliance with the GNU Affero General Public License.
 
-Copyright (c) 2006-2008 Kaltura Inc.  See LICENSE for details.
+Copyright (c) 2006-2010 Kaltura Inc.  See LICENSE for details.
