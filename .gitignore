@@ -1,0 +1,7 @@
+*.sw?
+*.gem
+.DS_Store
+coverage
+rdoc
+pkg
+doc
