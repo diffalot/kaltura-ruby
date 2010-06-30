@@ -40,8 +40,8 @@ module Kaltura
 				return nil
 			end
 					
-			log('service url: [' + @config.service_url + ']')
-			
+			#log('service url: [' + @config.service_url + ']')
+			puts 'service url: [' + @config.service_url + ']'
 			# append the basic params
 			params = {}
 			add_param(params, "format", @config.format)
@@ -68,17 +68,20 @@ module Kaltura
 			signature = signature(params)
 			add_param(params, "kalsig", signature)
 			
-			log("url: " + url)
-			log("params: " + params.to_yaml)
-			
+			#log("url: " + url)
+			puts "url: " + url
+			#log("params: " + params.to_yaml)
+			puts "params: " + params.to_yaml
 			result = do_http_request(url, params)
 			
 			result_object = parse_to_objects(result.body)
 
-			log("result (object yaml dump): " + result_object.to_yaml)
+			#log("result (object yaml dump): " + result_object.to_yaml)
+			puts "result (object yaml dump): " + result_object.to_yaml
 			
 			end_time = Time.now
 			log("execution time for [#{url}]: [#{end_time - start_time}]")
+			puts "execution time for [#{url}]: [#{end_time - start_time}]"
 			
 			return result_object			
 		end
