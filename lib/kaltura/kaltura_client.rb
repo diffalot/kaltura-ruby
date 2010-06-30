@@ -1,150 +1,19 @@
-require 'kaltura_client_base.rb'
+require 'kaltura/kaltura_client/kaltura_access_control_order_by'
+require 'kaltura/kaltura_client/kaltura_audio_codec'
+require 'kaltura/kaltura_client/kaltura_base_entry_order_by'
+require 'kaltura/kaltura_client/kaltura_base_job_order_by'
+require 'kaltura/kaltura_client/kaltura_base_syndication_feed_order_by'
+require 'kaltura/kaltura_client/kaltura_batch_job_order_by'
+require 'kaltura/kaltura_client/kaltura_batch_job_status'
+require 'kaltura/kaltura_client/kaltura_batch_job_type'
+require 'kaltura/kaltura_client/kaltura_bit_rate_mode'
+require 'kaltura/kaltura_client/kaltura_category_order_by'
+require 'kaltura/kaltura_client/kaltura_commercial_use_type'
+require 'kaltura/kaltura_client/kaltura_container_format'
+require 'kaltura/kaltura_client/kaltura_control_panel_command_order_by'
+require 'kaltura/kaltura_client/kaltura_control_panel_command_status'
 
 module Kaltura
-
-	class KalturaAccessControlOrderBy
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-	end
-
-	class KalturaAudioCodec
-		NONE = ""
-		MP3 = "mp3"
-		AAC = "aac"
-		VORBIS = "vorbis"
-		WMA = "wma"
-	end
-
-	class KalturaBaseEntryOrderBy
-		NAME_ASC = "+name"
-		NAME_DESC = "-name"
-		MODERATION_COUNT_ASC = "+moderationCount"
-		MODERATION_COUNT_DESC = "-moderationCount"
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-		RANK_ASC = "+rank"
-		RANK_DESC = "-rank"
-	end
-
-	class KalturaBaseJobOrderBy
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-		EXECUTION_ATTEMPTS_ASC = "+executionAttempts"
-		EXECUTION_ATTEMPTS_DESC = "-executionAttempts"
-	end
-
-	class KalturaBaseSyndicationFeedOrderBy
-		PLAYLIST_ID_ASC = "+playlistId"
-		PLAYLIST_ID_DESC = "-playlistId"
-		NAME_ASC = "+name"
-		NAME_DESC = "-name"
-		TYPE_ASC = "+type"
-		TYPE_DESC = "-type"
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-	end
-
-	class KalturaBatchJobOrderBy
-		STATUS_ASC = "+status"
-		STATUS_DESC = "-status"
-		QUEUE_TIME_ASC = "+queueTime"
-		QUEUE_TIME_DESC = "-queueTime"
-		FINISH_TIME_ASC = "+finishTime"
-		FINISH_TIME_DESC = "-finishTime"
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-		EXECUTION_ATTEMPTS_ASC = "+executionAttempts"
-		EXECUTION_ATTEMPTS_DESC = "-executionAttempts"
-	end
-
-	class KalturaBatchJobStatus
-		PENDING = 0
-		QUEUED = 1
-		PROCESSING = 2
-		PROCESSED = 3
-		MOVEFILE = 4
-		FINISHED = 5
-		FAILED = 6
-		ABORTED = 7
-		ALMOST_DONE = 8
-		RETRY = 9
-		FATAL = 10
-		DONT_PROCESS = 11
-	end
-
-	class KalturaBatchJobType
-		CONVERT = 0
-		IMPORT = 1
-		DELETE = 2
-		FLATTEN = 3
-		BULKUPLOAD = 4
-		DVDCREATOR = 5
-		DOWNLOAD = 6
-		OOCONVERT = 7
-		CONVERT_PROFILE = 10
-		POSTCONVERT = 11
-		PULL = 12
-		REMOTE_CONVERT = 13
-		EXTRACT_MEDIA = 14
-		MAIL = 15
-		NOTIFICATION = 16
-		CLEANUP = 17
-		SCHEDULER_HELPER = 18
-		BULKDOWNLOAD = 19
-		DB_CLEANUP = 20
-		PROVISION_PROVIDE = 21
-		CONVERT_COLLECTION = 22
-		STORAGE_EXPORT = 23
-		PROVISION_DELETE = 24
-		STORAGE_DELETE = 25
-		EMAIL_INGESTION = 26
-		PROJECT = 1000
-	end
-
-	class KalturaBitRateMode
-		CBR = 1
-		VBR = 2
-	end
-
-	class KalturaCategoryOrderBy
-		DEPTH_ASC = "+depth"
-		DEPTH_DESC = "-depth"
-		FULL_NAME_ASC = "+fullName"
-		FULL_NAME_DESC = "-fullName"
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-	end
-
-	class KalturaCommercialUseType
-		COMMERCIAL_USE = "commercial_use"
-		NON_COMMERCIAL_USE = "non-commercial_use"
-	end
-
-	class KalturaContainerFormat
-		FLV = "flv"
-		MP4 = "mp4"
-		AVI = "avi"
-		MOV = "mov"
-		MP3 = "mp3"
-		_3GP = "3gp"
-		OGG = "ogg"
-		WMV = "wmv"
-		ISMV = "ismv"
-	end
-
-	class KalturaControlPanelCommandOrderBy
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-		UPDATED_AT_ASC = "+updatedAt"
-		UPDATED_AT_DESC = "-updatedAt"
-	end
-
-	class KalturaControlPanelCommandStatus
-		PENDING = 1
-		HANDLED = 2
-		DONE = 3
-		FAILED = 4
-	end
 
 	class KalturaControlPanelCommandTargetType
 		DATA_CENTER = 1
@@ -5682,6 +5551,6 @@ module Kaltura
 			end
 			return @entry_admin_service
 		end
-    end
+  end
 
 end

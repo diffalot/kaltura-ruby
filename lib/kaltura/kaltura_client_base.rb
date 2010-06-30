@@ -1,10 +1,3 @@
-require 'rubygems'
-require 'json'
-require 'rest_client'
-require 'net/http'
-require 'digest/md5'
-require 'rexml/document'
-
 module Kaltura
 	class KalturaClientBase
 		attr_accessor 	:config
