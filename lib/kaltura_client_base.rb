@@ -91,7 +91,7 @@ module Kaltura
 			#req = Net::HTTP::Post.new(url.path + '?' + url.query)
 			#req.set_form_data(params)
 			#res = Net::HTTP.new(url.host, url.port).start { |http| http.request(req) }
-			res = RestClient.post url , params
+			#res = RestClient.post url , params
 			return res
 		end
 		
