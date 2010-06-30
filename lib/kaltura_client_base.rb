@@ -93,18 +93,23 @@ module Kaltura
 		
 		def parse_xml_to_objects(xml)
 			doc = REXML::Document.new(xml)
+			raise_exception_if_error(doc)
 			doc.elements.each('xml/result') do | element |
 				return KalturaClassFactory.object_from_xml(element)
 			end
 		end
 		
-		def parse_element_to_object(xml_element)
-		end
-		
-		def parse_elements_to_array(xml_elements)
-			xml_elements.each('item') do | element |
-			end
-		end
+    def raise_exception_if_error(doc)
+      if is_error(doc)
+        code = doc.elements["xml/result/error/code"].text
+        message = doc.elements["xml/result/error/message"].text
+        raise KalturaAPIError.new(code,message)
+      end
+    end
+    
+    def is_error(doc)
+      doc.elements["xml/result/error/message"] && doc.elements["xml/result/error/code"]
+    end
 		
 		def start_multirequest()
 			@is_multirequest = true
@@ -275,4 +280,14 @@ module Kaltura
 			val.gsub(/(.)([A-Z])/,'\1_\2').downcase
 		end
 	end
+	
+	class KalturaAPIError < RuntimeError
+	  attr_reader :code
+	  attr_reader :message
+	  
+	  def initialize(code,message)
+	    @code = code
+	    @message = message
+    end
+  end
 end

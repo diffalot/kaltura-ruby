@@ -4235,9 +4235,9 @@ module Kaltura
 			kparams = {}
 			client.add_param(kparams, 'fileData', file_data);
 			client.queue_service_action_call('media', 'upload', kparams);
-			#if (client.is_multirequest)
-			#	return nil;
-			#end
+			if (client.is_multirequest)
+				return nil;
+			end
 			return client.do_queue();
 		end
 
