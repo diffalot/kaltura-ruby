@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'json'
-require 'rest-client'
+require 'rest_client'
+require 'net/http'
 require 'digest/md5'
 require 'rexml/document'
 
@@ -40,8 +41,7 @@ module Kaltura
 				return nil
 			end
 					
-			#log('service url: [' + @config.service_url + ']')
-			puts 'service url: [' + @config.service_url + ']'
+			log('service url: [' + @config.service_url + ']')
 			# append the basic params
 			params = {}
 			add_param(params, "format", @config.format)
@@ -68,30 +68,22 @@ module Kaltura
 			signature = signature(params)
 			add_param(params, "kalsig", signature)
 			
-			#log("url: " + url)
-			puts "url: " + url
-			#log("params: " + params.to_yaml)
-			puts "params: " + params.to_yaml
+			log("url: " + url)
+			log("params: " + params.to_yaml)
 			result = do_http_request(url, params)
 			
 			result_object = parse_to_objects(result.body)
 
-			#log("result (object yaml dump): " + result_object.to_yaml)
-			puts "result (object yaml dump): " + result_object.to_yaml
+			log("result (object yaml dump): " + result_object.to_yaml)
 			
 			end_time = Time.now
 			log("execution time for [#{url}]: [#{end_time - start_time}]")
-			puts "execution time for [#{url}]: [#{end_time - start_time}]"
 			
 			return result_object			
 		end
 		
 		def do_http_request(url, params)
-			#url = URI.parse(url)
-			#req = Net::HTTP::Post.new(url.path + '?' + url.query)
-			#req.set_form_data(params)
-			#res = Net::HTTP.new(url.host, url.port).start { |http| http.request(req) }
-			#res = RestClient.post url , params
+			res = RestClient.post url , params
 			return res
 		end
 		
