@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'json'
-require 'net/http'
+require 'rest-client'
 require 'digest/md5'
 require 'rexml/document'
 
@@ -87,10 +87,11 @@ module Kaltura
 		end
 		
 		def do_http_request(url, params)
-			url = URI.parse(url)
-			req = Net::HTTP::Post.new(url.path + '?' + url.query)
-			req.set_form_data(params)
-			res = Net::HTTP.new(url.host, url.port).start { |http| http.request(req) }
+			#url = URI.parse(url)
+			#req = Net::HTTP::Post.new(url.path + '?' + url.query)
+			#req.set_form_data(params)
+			#res = Net::HTTP.new(url.host, url.port).start { |http| http.request(req) }
+			res = RestClient.post url , params
 			return res
 		end
 		

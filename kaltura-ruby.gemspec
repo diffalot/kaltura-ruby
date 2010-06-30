@@ -51,15 +51,18 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<activesupport>, [">= 0"])
       s.add_runtime_dependency(%q<activeresource>, [">= 0"])
       s.add_runtime_dependency(%q<json>, [">= 0"])
+      s.add_runtime_dependency(%q<rest-client>,[">=0"])
     else
       s.add_dependency(%q<activesupport>, [">= 0"])
       s.add_dependency(%q<activeresource>, [">= 0"])
       s.add_dependency(%q<json>, [">= 0"])
+      s.add_runtime_dependency(%q<rest-client>,[">=0"])      
     end
   else
     s.add_dependency(%q<activesupport>, [">= 0"])
     s.add_dependency(%q<activeresource>, [">= 0"])
     s.add_dependency(%q<json>, [">= 0"])
+    s.add_runtime_dependency(%q<rest-client>,[">=0"])    
   end
 end
 
