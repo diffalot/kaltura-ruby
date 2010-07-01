@@ -68,6 +68,18 @@ require 'kaltura/kaltura_client/kaltura_system_user_order_by'
 require 'kaltura/kaltura_client/kaltura_system_user_status'
 require 'kaltura/kaltura_client/kaltura_tube_mogul_syndication_feed_categories'
 require 'kaltura/kaltura_client/kaltura_tube_mogul_syndication_feed_order_by'
+require 'kaltura/kaltura_client/kaltura_ui_conf_obj_type'
+require 'kaltura/kaltura_client/kaltura_ui_conf_creation_mode'
+require 'kaltura/kaltura_client/kaltura_ui_conf_order_by'
+require 'kaltura/kaltura_client/kaltura_upload_error_code'
+require 'kaltura/kaltura_client/kaltura_user_order_by'
+require 'kaltura/kaltura_client/kaltura_user_status'
+require 'kaltura/kaltura_client/kaltura_video_codec'
+require 'kaltura/kaltura_client/kaltura_widget_order_by'
+require 'kaltura/kaltura_client/kaltura_widget_security_type'
+require 'kaltura/kaltura_client/kaltura_yahoo_syndication_feed_adult_values'
+require 'kaltura/kaltura_client/kaltura_yahoo_syndication_feed_categories'
+require 'kaltura/kaltura_client/kaltura_yahoo_syndication_feed_order_by'
 
 module Kaltura
   
@@ -78,106 +90,6 @@ module Kaltura
 	end
 	
 	class KalturaMediaInfoOrderBy
-	end
-
-	class KalturaUiConfCreationMode
-		WIZARD = 2
-		ADVANCED = 3
-	end
-
-	class KalturaUiConfObjType
-		PLAYER = 1
-		CONTRIBUTION_WIZARD = 2
-		SIMPLE_EDITOR = 3
-		ADVANCED_EDITOR = 4
-		PLAYLIST = 5
-		APP_STUDIO = 6
-	end
-
-	class KalturaUiConfOrderBy
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-		UPDATED_AT_ASC = "+updatedAt"
-		UPDATED_AT_DESC = "-updatedAt"
-	end
-
-	class KalturaUploadErrorCode
-		NO_ERROR = 0
-		GENERAL_ERROR = 1
-		PARTIAL_UPLOAD = 2
-	end
-
-	class KalturaUserOrderBy
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-	end
-
-	class KalturaUserStatus
-		BLOCKED = 0
-		ACTIVE = 1
-		DELETED = 2
-	end
-
-	class KalturaVideoCodec
-		NONE = ""
-		VP6 = "vp6"
-		H263 = "h263"
-		H264 = "h264"
-		FLV = "flv"
-		MPEG4 = "mpeg4"
-		THEORA = "theora"
-		WMV2 = "wmv2"
-		WMV3 = "wmv3"
-		WVC1A = "wvc1a"
-	end
-
-	class KalturaWidgetOrderBy
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-	end
-
-	class KalturaWidgetSecurityType
-		NONE = 1
-		TIMEHASH = 2
-	end
-
-	class KalturaYahooSyndicationFeedAdultValues
-		ADULT = "adult"
-		NON_ADULT = "nonadult"
-	end
-
-	class KalturaYahooSyndicationFeedCategories
-		ACTION = "Action"
-		ART_AND_ANIMATION = "Art &amp; Animation"
-		ENTERTAINMENT_AND_TV = "Entertainment &amp; TV"
-		FOOD = "Food"
-		GAMES = "Games"
-		HOW_TO = "How-To"
-		MUSIC = "Music"
-		PEOPLE_AND_VLOGS = "People &amp; Vlogs"
-		SCIENCE_AND_ENVIRONMENT = "Science &amp; Environment"
-		TRANSPORTATION = "Transportation"
-		ANIMALS = "Animals"
-		COMMERCIALS = "Commercials"
-		FAMILY = "Family"
-		FUNNY_VIDEOS = "Funny Videos"
-		HEALTH_AND_BEAUTY = "Health &amp; Beauty"
-		MOVIES_AND_SHORTS = "Movies &amp; Shorts"
-		NEWS_AND_POLITICS = "News &amp; Politics"
-		PRODUCTS_AND_TECH = "Products &amp; Tech."
-		SPORTS = "Sports"
-		TRAVEL = "Travel"
-	end
-
-	class KalturaYahooSyndicationFeedOrderBy
-		PLAYLIST_ID_ASC = "+playlistId"
-		PLAYLIST_ID_DESC = "-playlistId"
-		NAME_ASC = "+name"
-		NAME_DESC = "-name"
-		TYPE_ASC = "+type"
-		TYPE_DESC = "-type"
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
 	end
 
 	class KalturaBaseRestriction < KalturaObjectBase
