@@ -44,6 +44,30 @@ require 'kaltura/kaltura_client/kaltura_media_entry_order_by'
 require 'kaltura/kaltura_client/kaltura_media_type'
 require 'kaltura/kaltura_client/kaltura_mix_entry_order_by'
 require 'kaltura/kaltura_client/kaltura_moderation_flag_status'
+require 'kaltura/kaltura_client/kaltura_moderation_flag_type'
+require 'kaltura/kaltura_client/kaltura_moderation_object_type'
+require 'kaltura/kaltura_client/kaltura_notification_order_by'
+require 'kaltura/kaltura_client/kaltura_notification_type'
+require 'kaltura/kaltura_client/kaltura_nullable_boolean'
+require 'kaltura/kaltura_client/kaltura_partner_order_by'
+require 'kaltura/kaltura_client/kaltura_partner_status'
+require 'kaltura/kaltura_client/kaltura_partner_type'
+require 'kaltura/kaltura_client/kaltura_playable_entry_order_by'
+require 'kaltura/kaltura_client/kaltura_playlist_order_by'
+require 'kaltura/kaltura_client/kaltura_playlist_type'
+require 'kaltura/kaltura_client/kaltura_report_type'
+require 'kaltura/kaltura_client/kaltura_search_provider_type'
+require 'kaltura/kaltura_client/kaltura_session_type'
+require 'kaltura/kaltura_client/kaltura_site_restriction_type'
+require 'kaltura/kaltura_client/kaltura_source_type'
+require 'kaltura/kaltura_client/kaltura_stats_event_type'
+require 'kaltura/kaltura_client/kaltura_stats_kmc_event_type'
+require 'kaltura/kaltura_client/kaltura_syndication_feed_status'
+require 'kaltura/kaltura_client/kaltura_syndication_feed_type'
+require 'kaltura/kaltura_client/kaltura_system_user_order_by'
+require 'kaltura/kaltura_client/kaltura_system_user_status'
+require 'kaltura/kaltura_client/kaltura_tube_mogul_syndication_feed_categories'
+require 'kaltura/kaltura_client/kaltura_tube_mogul_syndication_feed_order_by'
 
 module Kaltura
   
@@ -54,309 +78,6 @@ module Kaltura
 	end
 	
 	class KalturaMediaInfoOrderBy
-	end
-
-	class KalturaModerationFlagType
-		SEXUAL_CONTENT = 1
-		VIOLENT_REPULSIVE = 2
-		HARMFUL_DANGEROUS = 3
-		SPAM_COMMERCIALS = 4
-	end
-
-	class KalturaModerationObjectType
-		ENTRY = 2
-		USER = 3
-	end
-
-	class KalturaNotificationOrderBy
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-		EXECUTION_ATTEMPTS_ASC = "+executionAttempts"
-		EXECUTION_ATTEMPTS_DESC = "-executionAttempts"
-	end
-
-	class KalturaNotificationType
-		ENTRY_ADD = 1
-		ENTR_UPDATE_PERMISSIONS = 2
-		ENTRY_DELETE = 3
-		ENTRY_BLOCK = 4
-		ENTRY_UPDATE = 5
-		ENTRY_UPDATE_THUMBNAIL = 6
-		ENTRY_UPDATE_MODERATION = 7
-		USER_ADD = 21
-		USER_BANNED = 26
-	end
-
-	class KalturaNullableBoolean
-		NULL_VALUE = -1
-		FALSE_VALUE = 0
-		TRUE_VALUE = 1
-	end
-
-	class KalturaPartnerOrderBy
-		ID_ASC = "+id"
-		ID_DESC = "-id"
-		NAME_ASC = "+name"
-		NAME_DESC = "-name"
-		WEBSITE_ASC = "+website"
-		WEBSITE_DESC = "-website"
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-		ADMIN_NAME_ASC = "+adminName"
-		ADMIN_NAME_DESC = "-adminName"
-		ADMIN_EMAIL_ASC = "+adminEmail"
-		ADMIN_EMAIL_DESC = "-adminEmail"
-		STATUS_ASC = "+status"
-		STATUS_DESC = "-status"
-	end
-
-	class KalturaPartnerStatus
-		ACTIVE = 1
-		BLOCKED = 2
-		FULL_BLOCK = 3
-	end
-
-	class KalturaPartnerType
-		KMC = 1
-		WIKI = 100
-		WORDPRESS = 101
-		DRUPAL = 102
-		DEKIWIKI = 103
-		MOODLE = 104
-		COMMUNITY_EDITION = 105
-		JOOMLA = 106
-	end
-
-	class KalturaPlayableEntryOrderBy
-		PLAYS_ASC = "+plays"
-		PLAYS_DESC = "-plays"
-		VIEWS_ASC = "+views"
-		VIEWS_DESC = "-views"
-		DURATION_ASC = "+duration"
-		DURATION_DESC = "-duration"
-		MS_DURATION_ASC = "+msDuration"
-		MS_DURATION_DESC = "-msDuration"
-		NAME_ASC = "+name"
-		NAME_DESC = "-name"
-		MODERATION_COUNT_ASC = "+moderationCount"
-		MODERATION_COUNT_DESC = "-moderationCount"
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-		RANK_ASC = "+rank"
-		RANK_DESC = "-rank"
-	end
-
-	class KalturaPlaylistOrderBy
-		NAME_ASC = "+name"
-		NAME_DESC = "-name"
-		MODERATION_COUNT_ASC = "+moderationCount"
-		MODERATION_COUNT_DESC = "-moderationCount"
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-		RANK_ASC = "+rank"
-		RANK_DESC = "-rank"
-	end
-
-	class KalturaPlaylistType
-		DYNAMIC = 10
-		STATIC_LIST = 3
-		EXTERNAL = 101
-	end
-
-	class KalturaReportType
-		TOP_CONTENT = 1
-		CONTENT_DROPOFF = 2
-		CONTENT_INTERACTIONS = 3
-		MAP_OVERLAY = 4
-		TOP_CONTRIBUTORS = 5
-		TOP_SYNDICATION = 6
-		CONTENT_CONTRIBUTIONS = 7
-		ADMIN_CONSOLE = 10
-	end
-
-	class KalturaSearchProviderType
-		FLICKR = 3
-		YOUTUBE = 4
-		MYSPACE = 7
-		PHOTOBUCKET = 8
-		JAMENDO = 9
-		CCMIXTER = 10
-		NYPL = 11
-		CURRENT = 12
-		MEDIA_COMMONS = 13
-		KALTURA = 20
-		KALTURA_USER_CLIPS = 21
-		ARCHIVE_ORG = 22
-		KALTURA_PARTNER = 23
-		METACAFE = 24
-		SEARCH_PROXY = 28
-		PARTNER_SPECIFIC = 100
-	end
-
-	class KalturaSessionType
-		USER = 0
-		ADMIN = 2
-	end
-
-	class KalturaSiteRestrictionType
-		RESTRICT_SITE_LIST = 0
-		ALLOW_SITE_LIST = 1
-	end
-
-	class KalturaSourceType
-		FILE = 1
-		WEBCAM = 2
-		URL = 5
-		SEARCH_PROVIDER = 6
-		AKAMAI_LIVE = 29
-	end
-
-	class KalturaStatsEventType
-		WIDGET_LOADED = 1
-		MEDIA_LOADED = 2
-		PLAY = 3
-		PLAY_REACHED_25 = 4
-		PLAY_REACHED_50 = 5
-		PLAY_REACHED_75 = 6
-		PLAY_REACHED_100 = 7
-		OPEN_EDIT = 8
-		OPEN_VIRAL = 9
-		OPEN_DOWNLOAD = 10
-		OPEN_REPORT = 11
-		BUFFER_START = 12
-		BUFFER_END = 13
-		OPEN_FULL_SCREEN = 14
-		CLOSE_FULL_SCREEN = 15
-		REPLAY = 16
-		SEEK = 17
-		OPEN_UPLOAD = 18
-		SAVE_PUBLISH = 19
-		CLOSE_EDITOR = 20
-		PRE_BUMPER_PLAYED = 21
-		POST_BUMPER_PLAYED = 22
-		BUMPER_CLICKED = 23
-		FUTURE_USE_1 = 24
-		FUTURE_USE_2 = 25
-		FUTURE_USE_3 = 26
-	end
-
-	class KalturaStatsKmcEventType
-		CONTENT_PAGE_VIEW = 1001
-		CONTENT_ADD_PLAYLIST = 1010
-		CONTENT_EDIT_PLAYLIST = 1011
-		CONTENT_DELETE_PLAYLIST = 1012
-		CONTENT_DELETE_ITEM = 1058
-		CONTENT_EDIT_ENTRY = 1013
-		CONTENT_CHANGE_THUMBNAIL = 1014
-		CONTENT_ADD_TAGS = 1015
-		CONTENT_REMOVE_TAGS = 1016
-		CONTENT_ADD_ADMIN_TAGS = 1017
-		CONTENT_REMOVE_ADMIN_TAGS = 1018
-		CONTENT_DOWNLOAD = 1019
-		CONTENT_APPROVE_MODERATION = 1020
-		CONTENT_REJECT_MODERATION = 1021
-		CONTENT_BULK_UPLOAD = 1022
-		CONTENT_ADMIN_KCW_UPLOAD = 1023
-		CONTENT_CONTENT_GO_TO_PAGE = 1057
-		CONTENT_ENTRY_DRILLDOWN = 1088
-		CONTENT_OPEN_PREVIEW_AND_EMBED = 1089
-		ACCOUNT_CHANGE_PARTNER_INFO = 1030
-		ACCOUNT_CHANGE_LOGIN_INFO = 1031
-		ACCOUNT_CONTACT_US_USAGE = 1032
-		ACCOUNT_UPDATE_SERVER_SETTINGS = 1033
-		ACCOUNT_ACCOUNT_OVERVIEW = 1034
-		ACCOUNT_ACCESS_CONTROL = 1035
-		ACCOUNT_TRANSCODING_SETTINGS = 1036
-		ACCOUNT_ACCOUNT_UPGRADE = 1037
-		ACCOUNT_SAVE_SERVER_SETTINGS = 1038
-		ACCOUNT_ACCESS_CONTROL_DELETE = 1039
-		ACCOUNT_SAVE_TRANSCODING_SETTINGS = 1040
-		LOGIN = 1041
-		DASHBOARD_IMPORT_CONTENT = 1042
-		DASHBOARD_UPDATE_CONTENT = 1043
-		DASHBOARD_ACCOUNT_CONTACT_US = 1044
-		DASHBOARD_VIEW_REPORTS = 1045
-		DASHBOARD_EMBED_PLAYER = 1046
-		DASHBOARD_EMBED_PLAYLIST = 1047
-		DASHBOARD_CUSTOMIZE_PLAYERS = 1048
-		APP_STUDIO_NEW_PLAYER_SINGLE_VIDEO = 1050
-		APP_STUDIO_NEW_PLAYER_PLAYLIST = 1051
-		APP_STUDIO_NEW_PLAYER_MULTI_TAB_PLAYLIST = 1052
-		APP_STUDIO_EDIT_PLAYER_SINGLE_VIDEO = 1053
-		APP_STUDIO_EDIT_PLAYER_PLAYLIST = 1054
-		APP_STUDIO_EDIT_PLAYER_MULTI_TAB_PLAYLIST = 1055
-		APP_STUDIO_DUPLICATE_PLAYER = 1056
-		REPORTS_AND_ANALYTICS_BANDWIDTH_USAGE_TAB = 1070
-		REPORTS_AND_ANALYTICS_CONTENT_REPORTS_TAB = 1071
-		REPORTS_AND_ANALYTICS_USERS_AND_COMMUNITY_REPORTS_TAB = 1072
-		REPORTS_AND_ANALYTICS_TOP_CONTRIBUTORS = 1073
-		REPORTS_AND_ANALYTICS_MAP_OVERLAYS = 1074
-		REPORTS_AND_ANALYTICS_TOP_SYNDICATIONS = 1075
-		REPORTS_AND_ANALYTICS_TOP_CONTENT = 1076
-		REPORTS_AND_ANALYTICS_CONTENT_DROPOFF = 1077
-		REPORTS_AND_ANALYTICS_CONTENT_INTERACTIONS = 1078
-		REPORTS_AND_ANALYTICS_CONTENT_CONTRIBUTIONS = 1079
-		REPORTS_AND_ANALYTICS_VIDEO_DRILL_DOWN = 1080
-		REPORTS_AND_ANALYTICS_CONTENT_DRILL_DOWN_INTERACTION = 1081
-		REPORTS_AND_ANALYTICS_CONTENT_CONTRIBUTIONS_DRILLDOWN = 1082
-		REPORTS_AND_ANALYTICS_VIDEO_DRILL_DOWN_DROPOFF = 1083
-		REPORTS_AND_ANALYTICS_MAP_OVERLAYS_DRILLDOWN = 1084
-		REPORTS_AND_ANALYTICS_TOP_SYNDICATIONS_DRILL_DOWN = 1085
-		REPORTS_AND_ANALYTICS_BANDWIDTH_USAGE_VIEW_MONTHLY = 1086
-		REPORTS_AND_ANALYTICS_BANDWIDTH_USAGE_VIEW_YEARLY = 1087
-	end
-
-	class KalturaSyndicationFeedStatus
-		DELETED = -1
-		ACTIVE = 1
-	end
-
-	class KalturaSyndicationFeedType
-		GOOGLE_VIDEO = 1
-		YAHOO = 2
-		ITUNES = 3
-		TUBE_MOGUL = 4
-	end
-
-	class KalturaSystemUserOrderBy
-		ID_ASC = "+id"
-		ID_DESC = "-id"
-		STATUS_ASC = "+status"
-		STATUS_DESC = "-status"
-	end
-
-	class KalturaSystemUserStatus
-		BLOCKED = 0
-		ACTIVE = 1
-	end
-
-	class KalturaTubeMogulSyndicationFeedCategories
-		ARTS_AND_ANIMATION = "Arts &amp; Animation"
-		COMEDY = "Comedy"
-		ENTERTAINMENT = "Entertainment"
-		MUSIC = "Music"
-		NEWS_AND_BLOGS = "News &amp; Blogs"
-		SCIENCE_AND_TECHNOLOGY = "Science &amp; Technology"
-		SPORTS = "Sports"
-		TRAVEL_AND_PLACES = "Travel &amp; Places"
-		VIDEO_GAMES = "Video Games"
-		ANIMALS_AND_PETS = "Animals &amp; Pets"
-		AUTOS = "Autos"
-		VLOGS_PEOPLE = "Vlogs &amp; People"
-		HOW_TO_INSTRUCTIONAL_DIY = "How To/Instructional/DIY"
-		COMMERCIALS_PROMOTIONAL = "Commercials/Promotional"
-		FAMILY_AND_KIDS = "Family &amp; Kids"
-	end
-
-	class KalturaTubeMogulSyndicationFeedOrderBy
-		PLAYLIST_ID_ASC = "+playlistId"
-		PLAYLIST_ID_DESC = "-playlistId"
-		NAME_ASC = "+name"
-		NAME_DESC = "-name"
-		TYPE_ASC = "+type"
-		TYPE_DESC = "-type"
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
 	end
 
 	class KalturaUiConfCreationMode
