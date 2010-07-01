@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{kaltura-ruby}
-  s.version = "0.1.1"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["papyromancer"]
-  s.date = %q{2010-06-30}
+  s.date = %q{2010-07-01}
   s.email = %q{papyromancer@papyromancer.net}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -26,12 +26,6 @@ Gem::Specification.new do |s|
      "kaltura-ruby.gemspec",
      "lib/kaltura.rb",
      "lib/kaltura/kaltura_client.rb",
-     "lib/kaltura/kaltura_client/kaltura_access_control_order_by.rb",
-     "lib/kaltura/kaltura_client/kaltura_audio_codec.rb",
-     "lib/kaltura/kaltura_client/kaltura_base_entry_order_by.rb",
-     "lib/kaltura/kaltura_client/kaltura_base_job_order_by.rb",
-     "lib/kaltura/kaltura_client/kaltura_base_syndication_feed_order_by.rb",
-     "lib/kaltura/kaltura_client/kaltura_batch_job_order_by.rb",
      "lib/kaltura/kaltura_client_base.rb",
      "test/kaltura-ruby_test.rb",
      "test/test.rb",
