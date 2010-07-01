@@ -12,396 +12,48 @@ require 'kaltura/kaltura_client/kaltura_commercial_use_type'
 require 'kaltura/kaltura_client/kaltura_container_format'
 require 'kaltura/kaltura_client/kaltura_control_panel_command_order_by'
 require 'kaltura/kaltura_client/kaltura_control_panel_command_status'
+require 'kaltura/kaltura_client/kaltura_control_panel_command_target_type'
+require 'kaltura/kaltura_client/kaltura_control_panel_command_type'
+require 'kaltura/kaltura_client/kaltura_conversion_profile_order_by'
+require 'kaltura/kaltura_client/kaltura_country_restriction_type'
+require 'kaltura/kaltura_client/kaltura_data_entry_order_by'
+require 'kaltura/kaltura_client/kaltura_directory_restriction_type'
+require 'kaltura/kaltura_client/kaltura_document_entry_order_by'
+require 'kaltura/kaltura_client/kaltura_document_type'
+require 'kaltura/kaltura_client/kaltura_duration_type'
+require 'kaltura/kaltura_client/kaltura_editor_type'
+require 'kaltura/kaltura_client/kaltura_email_ingestion_profile_status'
+require 'kaltura/kaltura_client/kaltura_entry_moderation_status'
+require 'kaltura/kaltura_client/kaltura_entry_status'
+require 'kaltura/kaltura_client/kaltura_entry_type'
+require 'kaltura/kaltura_client/kaltura_file_sync_object_type'
+require 'kaltura/kaltura_client/kaltura_file_sync_order_by'
+require 'kaltura/kaltura_client/kaltura_file_sync_status'
+require 'kaltura/kaltura_client/kaltura_file_sync_type'
+require 'kaltura/kaltura_client/kaltura_flavor_asset_status'
+require 'kaltura/kaltura_client/kaltura_gender'
+require 'kaltura/kaltura_client/kaltura_google_syndication_feed_adult_values'
+require 'kaltura/kaltura_client/kaltura_google_syndication_feed_order_by'
+require 'kaltura/kaltura_client/kaltura_i_tunes_syndication_feed_adult_values'
+require 'kaltura/kaltura_client/kaltura_i_tunes_syndication_feed_categories'
+require 'kaltura/kaltura_client/kaltura_i_tunes_syndication_feed_order_by'
+require 'kaltura/kaltura_client/kaltura_license_type'
+require 'kaltura/kaltura_client/kaltura_live_stream_admin_entry_order_by'
+require 'kaltura/kaltura_client/kaltura_mail_job_order_by'
+require 'kaltura/kaltura_client/kaltura_media_entry_order_by'
+require 'kaltura/kaltura_client/kaltura_media_type'
+require 'kaltura/kaltura_client/kaltura_mix_entry_order_by'
+require 'kaltura/kaltura_client/kaltura_moderation_flag_status'
 
 module Kaltura
-
-	class KalturaControlPanelCommandTargetType
-		DATA_CENTER = 1
-		SCHEDULER = 2
-		JOB_TYPE = 3
-		JOB = 4
-		BATCH = 5
-	end
-
-	class KalturaControlPanelCommandType
-		STOP = 1
-		START = 2
-		CONFIG = 3
-		KILL = 4
-	end
-
-	class KalturaConversionProfileOrderBy
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-	end
-
-	class KalturaCountryRestrictionType
-		RESTRICT_COUNTRY_LIST = 0
-		ALLOW_COUNTRY_LIST = 1
-	end
-
-	class KalturaDataEntryOrderBy
-		NAME_ASC = "+name"
-		NAME_DESC = "-name"
-		MODERATION_COUNT_ASC = "+moderationCount"
-		MODERATION_COUNT_DESC = "-moderationCount"
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-		RANK_ASC = "+rank"
-		RANK_DESC = "-rank"
-	end
-
-	class KalturaDirectoryRestrictionType
-		DONT_DISPLAY = 0
-		DISPLAY_WITH_LINK = 1
-	end
-
-	class KalturaDocumentEntryOrderBy
-		NAME_ASC = "+name"
-		NAME_DESC = "-name"
-		MODERATION_COUNT_ASC = "+moderationCount"
-		MODERATION_COUNT_DESC = "-moderationCount"
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-		RANK_ASC = "+rank"
-		RANK_DESC = "-rank"
-	end
-
-	class KalturaDocumentType
-		DOCUMENT = 11
-		SWF = 12
-	end
-
-	class KalturaDurationType
-		NOT_AVAILABLE = "notavailable"
-		SHORT = "short"
-		MEDIUM = "medium"
-		LONG = "long"
-	end
-
-	class KalturaEditorType
-		SIMPLE = 1
-		ADVANCED = 2
-	end
-
-	class KalturaEmailIngestionProfileStatus
-		INACTIVE = 0
-		ACTIVE = 1
-	end
-
-	class KalturaEntryModerationStatus
-		PENDING_MODERATION = 1
-		APPROVED = 2
-		REJECTED = 3
-		FLAGGED_FOR_REVIEW = 5
-		AUTO_APPROVED = 6
-	end
-
-	class KalturaEntryStatus
-		ERROR_IMPORTING = -2
-		ERROR_CONVERTING = -1
-		IMPORT = 0
-		PRECONVERT = 1
-		READY = 2
-		DELETED = 3
-		PENDING = 4
-		MODERATE = 5
-		BLOCKED = 6
-	end
-
-	class KalturaEntryType
-		AUTOMATIC = -1
-		MEDIA_CLIP = 1
-		MIX = 2
-		PLAYLIST = 5
-		DATA = 6
-		LIVE_STREAM = 7
-		DOCUMENT = 10
-	end
-
-	class KalturaFileSyncObjectType
-		ENTRY = 1
-		UICONF = 2
-		BATCHJOB = 3
-		FLAVOR_ASSET = 4
-	end
-
-	class KalturaFileSyncOrderBy
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-		UPDATED_AT_ASC = "+updatedAt"
-		UPDATED_AT_DESC = "-updatedAt"
-		READY_AT_ASC = "+readyAt"
-		READY_AT_DESC = "-readyAt"
-		SYNC_TIME_ASC = "+syncTime"
-		SYNC_TIME_DESC = "-syncTime"
-		FILE_SIZE_ASC = "+fileSize"
-		FILE_SIZE_DESC = "-fileSize"
-	end
-
-	class KalturaFileSyncStatus
-		ERROR = -1
-		PENDING = 1
-		READY = 2
-		DELETED = 3
-		PURGED = 4
-	end
-
-	class KalturaFileSyncType
-		FILE = 1
-		LINK = 2
-		URL = 3
-	end
-
-	class KalturaFlavorAssetStatus
-		ERROR = -1
-		QUEUED = 0
-		CONVERTING = 1
-		READY = 2
-		DELETED = 3
-		NOT_APPLICABLE = 4
-	end
-
+  
 	class KalturaFlavorParamsOrderBy
 	end
 
 	class KalturaFlavorParamsOutputOrderBy
 	end
-
-	class KalturaGender
-		UNKNOWN = 0
-		MALE = 1
-		FEMALE = 2
-	end
-
-	class KalturaGoogleSyndicationFeedAdultValues
-		YES = "Yes"
-		NO = "No"
-	end
-
-	class KalturaGoogleVideoSyndicationFeedOrderBy
-		PLAYLIST_ID_ASC = "+playlistId"
-		PLAYLIST_ID_DESC = "-playlistId"
-		NAME_ASC = "+name"
-		NAME_DESC = "-name"
-		TYPE_ASC = "+type"
-		TYPE_DESC = "-type"
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-	end
-
-	class KalturaITunesSyndicationFeedAdultValues
-		YES = "yes"
-		NO = "no"
-		CLEAN = "clean"
-	end
-
-	class KalturaITunesSyndicationFeedCategories
-		ARTS = "Arts"
-		ARTS_DESIGN = "Arts/Design"
-		ARTS_FASHION_BEAUTY = "Arts/Fashion &amp; Beauty"
-		ARTS_FOOD = "Arts/Food"
-		ARTS_LITERATURE = "Arts/Literature"
-		ARTS_PERFORMING_ARTS = "Arts/Performing Arts"
-		ARTS_VISUAL_ARTS = "Arts/Visual Arts"
-		BUSINESS = "Business"
-		BUSINESS_BUSINESS_NEWS = "Business/Business News"
-		BUSINESS_CAREERS = "Business/Careers"
-		BUSINESS_INVESTING = "Business/Investing"
-		BUSINESS_MANAGEMENT_MARKETING = "Business/Management &amp; Marketing"
-		BUSINESS_SHOPPING = "Business/Shopping"
-		COMEDY = "Comedy"
-		EDUCATION = "Education"
-		EDUCATION_TECHNOLOGY = "Education/Education Technology"
-		EDUCATION_HIGHER_EDUCATION = "Education/Higher Education"
-		EDUCATION_K_12 = "Education/K-12"
-		EDUCATION_LANGUAGE_COURSES = "Education/Language Courses"
-		EDUCATION_TRAINING = "Education/Training"
-		GAMES_HOBBIES = "Games &amp; Hobbies"
-		GAMES_HOBBIES_AUTOMOTIVE = "Games &amp; Hobbies/Automotive"
-		GAMES_HOBBIES_AVIATION = "Games &amp; Hobbies/Aviation"
-		GAMES_HOBBIES_HOBBIES = "Games &amp; Hobbies/Hobbies"
-		GAMES_HOBBIES_OTHER_GAMES = "Games &amp; Hobbies/Other Games"
-		GAMES_HOBBIES_VIDEO_GAMES = "Games &amp; Hobbies/Video Games"
-		GOVERNMENT_ORGANIZATIONS = "Government &amp; Organizations"
-		GOVERNMENT_ORGANIZATIONS_LOCAL = "Government &amp; Organizations/Local"
-		GOVERNMENT_ORGANIZATIONS_NATIONAL = "Government &amp; Organizations/National"
-		GOVERNMENT_ORGANIZATIONS_NON_PROFIT = "Government &amp; Organizations/Non-Profit"
-		GOVERNMENT_ORGANIZATIONS_REGIONAL = "Government &amp; Organizations/Regional"
-		HEALTH = "Health"
-		HEALTH_ALTERNATIVE_HEALTH = "Health/Alternative Health"
-		HEALTH_FITNESS_NUTRITION = "Health/Fitness &amp; Nutrition"
-		HEALTH_SELF_HELP = "Health/Self-Help"
-		HEALTH_SEXUALITY = "Health/Sexuality"
-		KIDS_FAMILY = "Kids &amp; Family"
-		MUSIC = "Music"
-		NEWS_POLITICS = "News &amp; Politics"
-		RELIGION_SPIRITUALITY = "Religion &amp; Spirituality"
-		RELIGION_SPIRITUALITY_BUDDHISM = "Religion &amp; Spirituality/Buddhism"
-		RELIGION_SPIRITUALITY_CHRISTIANITY = "Religion &amp; Spirituality/Christianity"
-		RELIGION_SPIRITUALITY_HINDUISM = "Religion &amp; Spirituality/Hinduism"
-		RELIGION_SPIRITUALITY_ISLAM = "Religion &amp; Spirituality/Islam"
-		RELIGION_SPIRITUALITY_JUDAISM = "Religion &amp; Spirituality/Judaism"
-		RELIGION_SPIRITUALITY_OTHER = "Religion &amp; Spirituality/Other"
-		RELIGION_SPIRITUALITY_SPIRITUALITY = "Religion &amp; Spirituality/Spirituality"
-		SCIENCE_MEDICINE = "Science &amp; Medicine"
-		SCIENCE_MEDICINE_MEDICINE = "Science &amp; Medicine/Medicine"
-		SCIENCE_MEDICINE_NATURAL_SCIENCES = "Science &amp; Medicine/Natural Sciences"
-		SCIENCE_MEDICINE_SOCIAL_SCIENCES = "Science &amp; Medicine/Social Sciences"
-		SOCIETY_CULTURE = "Society &amp; Culture"
-		SOCIETY_CULTURE_HISTORY = "Society &amp; Culture/History"
-		SOCIETY_CULTURE_PERSONAL_JOURNALS = "Society &amp; Culture/Personal Journals"
-		SOCIETY_CULTURE_PHILOSOPHY = "Society &amp; Culture/Philosophy"
-		SOCIETY_CULTURE_PLACES_TRAVEL = "Society &amp; Culture/Places &amp; Travel"
-		SPORTS_RECREATION = "Sports &amp; Recreation"
-		SPORTS_RECREATION_AMATEUR = "Sports &amp; Recreation/Amateur"
-		SPORTS_RECREATION_COLLEGE_HIGH_SCHOOL = "Sports &amp; Recreation/College &amp; High School"
-		SPORTS_RECREATION_OUTDOOR = "Sports &amp; Recreation/Outdoor"
-		SPORTS_RECREATION_PROFESSIONAL = "Sports &amp; Recreation/Professional"
-		TECHNOLOGY = "Technology"
-		TECHNOLOGY_GADGETS = "Technology/Gadgets"
-		TECHNOLOGY_TECH_NEWS = "Technology/Tech News"
-		TECHNOLOGY_PODCASTING = "Technology/Podcasting"
-		TECHNOLOGY_SOFTWARE_HOW_TO = "Technology/Software How-To"
-		TV_FILM = "TV &amp; Film"
-	end
-
-	class KalturaITunesSyndicationFeedOrderBy
-		PLAYLIST_ID_ASC = "+playlistId"
-		PLAYLIST_ID_DESC = "-playlistId"
-		NAME_ASC = "+name"
-		NAME_DESC = "-name"
-		TYPE_ASC = "+type"
-		TYPE_DESC = "-type"
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-	end
-
-	class KalturaLicenseType
-		UNKNOWN = -1
-		NONE = 0
-		COPYRIGHTED = 1
-		PUBLIC_DOMAIN = 2
-		CREATIVECOMMONS_ATTRIBUTION = 3
-		CREATIVECOMMONS_ATTRIBUTION_SHARE_ALIKE = 4
-		CREATIVECOMMONS_ATTRIBUTION_NO_DERIVATIVES = 5
-		CREATIVECOMMONS_ATTRIBUTION_NON_COMMERCIAL = 6
-		CREATIVECOMMONS_ATTRIBUTION_NON_COMMERCIAL_SHARE_ALIKE = 7
-		CREATIVECOMMONS_ATTRIBUTION_NON_COMMERCIAL_NO_DERIVATIVES = 8
-		GFDL = 9
-		GPL = 10
-		AFFERO_GPL = 11
-		LGPL = 12
-		BSD = 13
-		APACHE = 14
-		MOZILLA = 15
-	end
-
-	class KalturaLiveStreamAdminEntryOrderBy
-		MEDIA_TYPE_ASC = "+mediaType"
-		MEDIA_TYPE_DESC = "-mediaType"
-		PLAYS_ASC = "+plays"
-		PLAYS_DESC = "-plays"
-		VIEWS_ASC = "+views"
-		VIEWS_DESC = "-views"
-		DURATION_ASC = "+duration"
-		DURATION_DESC = "-duration"
-		MS_DURATION_ASC = "+msDuration"
-		MS_DURATION_DESC = "-msDuration"
-		NAME_ASC = "+name"
-		NAME_DESC = "-name"
-		MODERATION_COUNT_ASC = "+moderationCount"
-		MODERATION_COUNT_DESC = "-moderationCount"
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-		RANK_ASC = "+rank"
-		RANK_DESC = "-rank"
-	end
-
-	class KalturaLiveStreamEntryOrderBy
-		MEDIA_TYPE_ASC = "+mediaType"
-		MEDIA_TYPE_DESC = "-mediaType"
-		PLAYS_ASC = "+plays"
-		PLAYS_DESC = "-plays"
-		VIEWS_ASC = "+views"
-		VIEWS_DESC = "-views"
-		DURATION_ASC = "+duration"
-		DURATION_DESC = "-duration"
-		MS_DURATION_ASC = "+msDuration"
-		MS_DURATION_DESC = "-msDuration"
-		NAME_ASC = "+name"
-		NAME_DESC = "-name"
-		MODERATION_COUNT_ASC = "+moderationCount"
-		MODERATION_COUNT_DESC = "-moderationCount"
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-		RANK_ASC = "+rank"
-		RANK_DESC = "-rank"
-	end
-
-	class KalturaMailJobOrderBy
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-		EXECUTION_ATTEMPTS_ASC = "+executionAttempts"
-		EXECUTION_ATTEMPTS_DESC = "-executionAttempts"
-	end
-
-	class KalturaMediaEntryOrderBy
-		MEDIA_TYPE_ASC = "+mediaType"
-		MEDIA_TYPE_DESC = "-mediaType"
-		PLAYS_ASC = "+plays"
-		PLAYS_DESC = "-plays"
-		VIEWS_ASC = "+views"
-		VIEWS_DESC = "-views"
-		DURATION_ASC = "+duration"
-		DURATION_DESC = "-duration"
-		MS_DURATION_ASC = "+msDuration"
-		MS_DURATION_DESC = "-msDuration"
-		NAME_ASC = "+name"
-		NAME_DESC = "-name"
-		MODERATION_COUNT_ASC = "+moderationCount"
-		MODERATION_COUNT_DESC = "-moderationCount"
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-		RANK_ASC = "+rank"
-		RANK_DESC = "-rank"
-	end
-
+	
 	class KalturaMediaInfoOrderBy
-	end
-
-	class KalturaMediaType
-		VIDEO = 1
-		IMAGE = 2
-		AUDIO = 5
-		LIVE_STREAM_FLASH = 201
-		LIVE_STREAM_WINDOWS_MEDIA = 202
-		LIVE_STREAM_REAL_MEDIA = 203
-		LIVE_STREAM_QUICKTIME = 204
-	end
-
-	class KalturaMixEntryOrderBy
-		PLAYS_ASC = "+plays"
-		PLAYS_DESC = "-plays"
-		VIEWS_ASC = "+views"
-		VIEWS_DESC = "-views"
-		DURATION_ASC = "+duration"
-		DURATION_DESC = "-duration"
-		MS_DURATION_ASC = "+msDuration"
-		MS_DURATION_DESC = "-msDuration"
-		NAME_ASC = "+name"
-		NAME_DESC = "-name"
-		MODERATION_COUNT_ASC = "+moderationCount"
-		MODERATION_COUNT_DESC = "-moderationCount"
-		CREATED_AT_ASC = "+createdAt"
-		CREATED_AT_DESC = "-createdAt"
-		RANK_ASC = "+rank"
-		RANK_DESC = "-rank"
-	end
-
-	class KalturaModerationFlagStatus
-		PENDING = 1
-		MODERATED = 2
 	end
 
 	class KalturaModerationFlagType
