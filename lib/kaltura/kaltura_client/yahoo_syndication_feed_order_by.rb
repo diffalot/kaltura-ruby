@@ -1,6 +1,6 @@
 module Kaltura
   
-	class KalturaYahooSyndicationFeedOrderBy
+	class YahooSyndicationFeedOrderBy
 		PLAYLIST_ID_ASC = "+playlistId"
 		PLAYLIST_ID_DESC = "-playlistId"
 		NAME_ASC = "+name"
