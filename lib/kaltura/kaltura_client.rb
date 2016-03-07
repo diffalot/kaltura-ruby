@@ -87,6 +87,7 @@ module Kaltura
 		attr_accessor :tags
 		attr_accessor :admin_tags
 		attr_accessor :categories
+		attr_accessor :categories_ids
 		attr_accessor :status
 		attr_accessor :moderation_status
 		attr_accessor :moderation_count
